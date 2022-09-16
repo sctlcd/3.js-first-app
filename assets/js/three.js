@@ -1,5 +1,6 @@
 import * as THREE from './../../node_modules/three/build/three.module.js';
-// import { TrackballControls } from '../../node_modules/three/examples/jsm/controls/TrackballControls.js';
+// import { TrackballControls } from './../../node_modules/three/examples/jsm/controls/TrackballControls';
+import { TrackballControls } from "https://cdn.skypack.dev/three-trackballcontrols-ts@0.2.3";
 
 // creating the scene
 // scene
@@ -69,17 +70,24 @@ for (let i=0; i<6; i++) {
   console.log(lights[i].color);
 }
 
-// //Trackball Controls for Camera 
-// const controls = new TrackballControls(camera, renderer.domElement); 
-// controls.rotateSpeed = 4;
-// controls.dynamicDampingFactor = 0.15;
+//Trackball Controls for Camera 
+const controls = new TrackballControls(camera, renderer.domElement); 
+controls.rotateSpeed = 4;
+controls.dynamicDampingFactor = 0.15;
+
+// Make canvas responsive
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+})
 
 // rendering the scene
 function rendering() {
   requestAnimationFrame( rendering );
 
   // Update trackball controls
-  // controls.update();
+  controls.update();
 
   scene.rotation.x += 0.02;
   scene.rotation.y += 0.02;
@@ -88,11 +96,4 @@ function rendering() {
 };
 
 rendering();
-
-// Make canvas responsive
-window.addEventListener('resize', () => {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-})
 
