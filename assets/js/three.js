@@ -13,8 +13,8 @@ camera.position.z = 5;
 
 const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setClearColor("#233143");
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
 // creating the box
 const boxGeometry = new THREE.BoxGeometry(2, 2, 2);
@@ -38,7 +38,7 @@ for (let i = 0; i < positionAttribute.count; i += 3) {
 }
 
 // define the new attribute
-boxGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute(colors, 3));
+boxGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 
 const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
 boxMesh.geometry.colorsNeedUpdate = true;
@@ -47,6 +47,7 @@ scene.add(boxMesh);
 
 // Lights
 const lights = [];
+const lightHelpers = [];
 const lightValues = [
   {intensity: 8, dist: 12, x: 1, y: 0, z: 8},
   {intensity: 6, dist: 12, x: -2, y: 1, z: -10},
@@ -56,7 +57,7 @@ const lightValues = [
   {intensity: 6, dist: 12, x: -10, y: -1, z: 0}
 ];
 for (let i=0; i<6; i++) {
-  const color = new THREE.Color( 0xffffff );
+  const color = new THREE.Color(0xffffff);
 
   lights[i] = new THREE.PointLight(
     color, 
@@ -68,6 +69,9 @@ for (let i=0; i<6; i++) {
     lightValues[i]['z']);
   scene.add(lights[i]);
   console.log(lights[i].color);
+
+  lightHelpers[i] = new THREE.PointLightHelper(lights[i], 0.7);
+  scene.add(lightHelpers[i]);
 }
 
 //Trackball Controls for Camera 
@@ -84,7 +88,7 @@ window.addEventListener('resize', () => {
 
 // rendering the scene
 function rendering() {
-  requestAnimationFrame( rendering );
+  requestAnimationFrame(rendering);
 
   // Update trackball controls
   controls.update();
@@ -92,7 +96,7 @@ function rendering() {
   scene.rotation.x += 0.02;
   scene.rotation.y += 0.02;
 
-  renderer.render( scene, camera );
+  renderer.render(scene, camera);
 };
 
 rendering();
