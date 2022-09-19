@@ -8,7 +8,7 @@ const scene = new THREE.Scene();
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.8, 1000);
-camera.position.z = 5; // set camera position
+camera.position.z = 16; // set camera position
 
 // renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
@@ -24,7 +24,7 @@ window.addEventListener('resize', () => {
 })
 
 // create the box
-const boxGeometry = new THREE.BoxGeometry( 1, 1, 1 ); // define geometry
+const boxGeometry = new THREE.SphereGeometry( 1.4, 32, 32 ); // define geometry
 const boxMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF, metalness: 1, roughness: 0.1}); // define material // simple white box
 
 const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial); // build box
@@ -33,7 +33,7 @@ scene.add(boxMesh); // add box to canvas
 
 // create spheres
 const sphereMeshes = [];
-const sphereGeometry = new THREE.SphereGeometry(0.1, 32, 32); // define geometry
+const sphereGeometry = new THREE.SphereGeometry(0.3, 32, 32); // define geometry
 const sphereMaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF}); // define material
 for (let i=0; i<4; i++) {
   sphereMeshes[i] = new THREE.Mesh(sphereGeometry, sphereMaterial); // build sphere
@@ -50,9 +50,9 @@ const lightValues = [
   {intensity: 8, dist: 12, x: 1, y: 0, z: 8},
   {intensity: 6, dist: 12, x: -2, y: 1, z: -10},
   {intensity: 3, dist: 10, x: 0, y: 10, z: 1},
-  {intensity: 6, dist: 12, x: 0, y: -10, z: -1},
-  {intensity: 6, dist: 12, x: 10, y: 3, z: 0},
-  {intensity: 6, dist: 12, x: -10, y: -1, z: 0}
+  {intensity: 4, dist: 12, x: 0, y: -10, z: -1},
+  {intensity: 7, dist: 12, x: 10, y: 3, z: 0},
+  {intensity: 2, dist: 12, x: -10, y: -1, z: 0}
 ];
 for (let i=0; i<6; i++) {
   // loop 6 times to add each light to lights array
@@ -91,9 +91,9 @@ for (let i=0; i<6; i++) {
   lightHelpers[i] = new THREE.PointLightHelper(lights[i], 0.6);
   scene.add(lightHelpers[i]);
 
-  // axes helper
-  const axesHelper = new THREE.AxesHelper(5);
-  scene.add(axesHelper); // X == red, Y == green, Z == blue
+  // // axes helper
+  // const axesHelper = new THREE.AxesHelper(5);
+  // scene.add(axesHelper); // X == red, Y == green, Z == blue
 }
 
 // trackball controls for camera 
