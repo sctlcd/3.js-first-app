@@ -4,7 +4,9 @@ import { TrackballControls } from "https://cdn.skypack.dev/three-trackballcontro
 
 // create the scene
 // scene
-const scene = new THREE.Scene();
+const scene = new THREE.Scene(); // define scene
+const sceneTexture = new THREE.TextureLoader().load('https://i.imgur.com/P7z3aw1.jpeg'); // define texture
+scene.background = sceneTexture // set scene background
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.8, 1000);
@@ -12,7 +14,6 @@ camera.position.z = 16; // set camera position
 
 // renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setClearColor("#000727"); // set background colour
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement); // add renderer to HTML as a canvas element
 
