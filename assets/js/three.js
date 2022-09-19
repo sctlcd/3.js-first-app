@@ -12,7 +12,7 @@ camera.position.z = 16; // set camera position
 
 // renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setClearColor("#010930"); // set background colour
+renderer.setClearColor("#000727"); // set background colour
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement); // add renderer to HTML as a canvas element
 
@@ -24,17 +24,19 @@ window.addEventListener('resize', () => {
 })
 
 // create the box
-const boxGeometry = new THREE.SphereGeometry( 1.4, 32, 32 ); // define geometry
-const boxMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF, metalness: 1, roughness: 0.1}); // define material // simple white box
+const boxGeometry = new THREE.SphereGeometry( 1.6, 32, 32 ); // define geometry
+const boxTexture = new THREE.TextureLoader().load('https://i.imgur.com/sSZc7Yr.png'); // define texture
+const boxMaterial = new THREE.MeshStandardMaterial({map : boxTexture, overdraw: 0.1}); // define material // simple white box
 
 const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial); // build box
 boxMesh.rotation.set(40, 0, 40); // set box initial rotation
 scene.add(boxMesh); // add box to canvas
 
-// create spheres
+// create orbiting spheres
 const sphereMeshes = [];
 const sphereGeometry = new THREE.SphereGeometry(0.3, 32, 32); // define geometry
-const sphereMaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF}); // define material
+const sphereTexture = new THREE.TextureLoader().load('https://i.imgur.com/5FbL240.jpeg'); // define texture
+const sphereMaterial = new THREE.MeshLambertMaterial({map : sphereTexture, overdraw: 0.5}); // define material
 for (let i=0; i<4; i++) {
   sphereMeshes[i] = new THREE.Mesh(sphereGeometry, sphereMaterial); // build sphere
   sphereMeshes[i].position.set(0, 0, 0);
