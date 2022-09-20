@@ -4,15 +4,16 @@ import { TrackballControls } from "https://cdn.skypack.dev/three-trackballcontro
 
 // create the scene
 // scene
-const scene = new THREE.Scene();
+const scene = new THREE.Scene(); // define scene
+const sceneTexture = new THREE.TextureLoader().load('https://i.imgur.com/P7z3aw1.jpeg'); // define texture
+scene.background = sceneTexture // set scene background
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.8, 1000);
-camera.position.z = 5; // set camera position
+camera.position.z = 16; // set camera position
 
 // renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setClearColor("#010930"); // set background colour
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement); // add renderer to HTML as a canvas element
 
@@ -24,17 +25,19 @@ window.addEventListener('resize', () => {
 })
 
 // create the box
-const boxGeometry = new THREE.BoxGeometry( 1, 1, 1 ); // define geometry
-const boxMaterial = new THREE.MeshStandardMaterial({color: 0xFFFFFF, metalness: 1, roughness: 0.1}); // define material // simple white box
+const boxGeometry = new THREE.SphereGeometry( 1.6, 32, 32 ); // define geometry
+const boxTexture = new THREE.TextureLoader().load('https://i.imgur.com/sSZc7Yr.png'); // define texture
+const boxMaterial = new THREE.MeshStandardMaterial({map : boxTexture, overdraw: 0.1}); // define material // simple white box
 
 const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial); // build box
 boxMesh.rotation.set(40, 0, 40); // set box initial rotation
 scene.add(boxMesh); // add box to canvas
 
-// create spheres
+// create orbiting spheres
 const sphereMeshes = [];
-const sphereGeometry = new THREE.SphereGeometry(0.1, 32, 32); // define geometry
-const sphereMaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF}); // define material
+const sphereGeometry = new THREE.SphereGeometry(0.3, 32, 32); // define geometry
+const sphereTexture = new THREE.TextureLoader().load('https://i.imgur.com/5FbL240.jpeg'); // define texture
+const sphereMaterial = new THREE.MeshLambertMaterial({map : sphereTexture, overdraw: 0.5}); // define material
 for (let i=0; i<4; i++) {
   sphereMeshes[i] = new THREE.Mesh(sphereGeometry, sphereMaterial); // build sphere
   sphereMeshes[i].position.set(0, 0, 0);
@@ -50,9 +53,9 @@ const lightValues = [
   {intensity: 8, dist: 12, x: 1, y: 0, z: 8},
   {intensity: 6, dist: 12, x: -2, y: 1, z: -10},
   {intensity: 3, dist: 10, x: 0, y: 10, z: 1},
-  {intensity: 6, dist: 12, x: 0, y: -10, z: -1},
-  {intensity: 6, dist: 12, x: 10, y: 3, z: 0},
-  {intensity: 6, dist: 12, x: -10, y: -1, z: 0}
+  {intensity: 4, dist: 12, x: 0, y: -10, z: -1},
+  {intensity: 7, dist: 12, x: 10, y: 3, z: 0},
+  {intensity: 2, dist: 12, x: -10, y: -1, z: 0}
 ];
 for (let i=0; i<6; i++) {
   // loop 6 times to add each light to lights array
@@ -91,9 +94,9 @@ for (let i=0; i<6; i++) {
   lightHelpers[i] = new THREE.PointLightHelper(lights[i], 0.6);
   scene.add(lightHelpers[i]);
 
-  // axes helper
-  const axesHelper = new THREE.AxesHelper(5);
-  scene.add(axesHelper); // X == red, Y == green, Z == blue
+  // // axes helper
+  // const axesHelper = new THREE.AxesHelper(5);
+  // scene.add(axesHelper); // X == red, Y == green, Z == blue
 }
 
 // trackball controls for camera 
