@@ -10,7 +10,7 @@ scene.background = sceneTexture // set scene background
 
 // camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.8, 1000);
-camera.position.z = 16; // set camera position
+camera.position.z = 6; // set camera position
 
 // renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
