@@ -88,11 +88,10 @@ for (let i=0; i<6; i++) {
     lightValues[i]['z']);
 
   scene.add(lights[i]); // add sphere to canvas
-  console.log(lights[i].color);
 
   // add light helpers for each light
   lightHelpers[i] = new THREE.PointLightHelper(lights[i], 0.6);
-  scene.add(lightHelpers[i]);
+  // scene.add(lightHelpers[i]);
 
   // // axes helper
   // const axesHelper = new THREE.AxesHelper(5);
