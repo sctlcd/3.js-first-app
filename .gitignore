@@ -1,8 +1,2 @@
 node_modules
-.firebase
 .github/
-dist
-.firebaserc
-
-database-debug.log
-ui-debug.log
