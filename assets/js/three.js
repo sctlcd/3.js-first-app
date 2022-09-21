@@ -1,4 +1,4 @@
-import * as THREE from './../../node_modules/three/build/three.module.js';
+import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.144.0/three.module.js';
 // import { TrackballControls } from './../../node_modules/three/examples/jsm/controls/TrackballControls';
 import { TrackballControls } from "https://cdn.skypack.dev/three-trackballcontrols-ts@0.2.3";
 
