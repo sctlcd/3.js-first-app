@@ -19,9 +19,12 @@ document.body.appendChild(renderer.domElement); // add renderer to HTML as a can
 
 // make canvas responsive
 window.addEventListener('resize', () => {
-  renderer.setSize(window.innerWidth, window.innerHeight); // update size
   camera.aspect = window.innerWidth / window.innerHeight; // update aspect ratio
   camera.updateProjectionMatrix(); // apply changes
+  
+  renderer.setSize(window.innerWidth, window.innerHeight); // update size
+  renderer.setPixelRatio(window.devicePixelRatio); // use to render at the native screen resolution
+  // renderer.render(scene, camera); // Not needed since it is called in rendering()
 })
 
 // create the box
